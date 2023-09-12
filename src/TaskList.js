@@ -7,9 +7,8 @@ export default function TaskList({
   onDeleteTodo,
   onSetSelectTodo
 }) {
-  // Determine if editing is allowed
-  const isEditingAllowed = selectedTodos.length === 1;
   const [editingTodoId, setEditingTodoId] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   return (
     <div>
@@ -21,7 +20,7 @@ export default function TaskList({
               selectedTodos={selectedTodos}
               onChangeTodo={onChangeTodo}
               onSetSelectTodo={onSetSelectTodo}
-              isEditing={editingTodoId === todo.id}
+              isEditing={isEditing && editingTodoId === todo.id}
               setEditingTodoId={setEditingTodoId}
             />
           </li>
@@ -30,8 +29,11 @@ export default function TaskList({
 
       {/* EDIT button here */}
       <button
-        onClick={() => setEditingTodoId(selectedTodos[0])}
-        disabled={!isEditingAllowed}
+        onClick={() => {
+          setEditingTodoId(selectedTodos[0]);
+          setIsEditing(true);
+        }}
+        disabled={selectedTodos.length !== 1}
       >
         Edit
       </button>
