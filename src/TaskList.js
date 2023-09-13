@@ -81,12 +81,12 @@ function Task({
         checked={selectedTodos.includes(todo.id)}
         onChange={(e) => {
           if (e.target.checked) {
-            onSetSelectTodo((currentSelected) => {
-              return [...currentSelected, todo.id];
+            onSetSelectTodo((allCurrentlySelected) => {
+              return [...allCurrentlySelected, todo.id];
             });
           } else {
-            onSetSelectTodo((currentSelected) =>
-              currentSelected.filter((id) => id !== todo.id)
+            onSetSelectTodo((allCurrentlySelected) =>
+              allCurrentlySelected.filter((id) => id !== todo.id)
             );
           }
         }}
